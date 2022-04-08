@@ -290,8 +290,8 @@ def guessLanguage(text):
     if not text:
         return UNKNOWN
     
-    if isinstance(text, str):
-        text = unicode(text, 'utf-8')
+    # if isinstance(text, str):
+    #     text = unicode(text, 'utf-8')
     
     text = normalize(text)
     
@@ -448,7 +448,7 @@ def createOrderedModel(content):
     trigrams = defaultdict(int) # QHash<QString,int> 
     content = content.lower()
     
-    for i in xrange(0, len(content)-2):
+    for i in range(0, len(content)-2):
         trigrams[content[i:i+3]]+=1
 
     return sorted(trigrams.keys(), key=lambda k: (-trigrams[k], k))
@@ -473,7 +473,7 @@ def distance(model, knownModel):
 def _makeNonAlphaRe():
     nonAlpha = [u'[^']
     for i in range(sys.maxunicode):
-      c = unichr(i)
+      c = chr(i)
       if c.isalpha(): nonAlpha.append(c)
     nonAlpha.append(u']')
     nonAlpha = u"".join(nonAlpha)
